@@ -55,6 +55,13 @@ def readFile(filename)
 	$myinfo = info
 end
 
+def writeFile(filename, message)
+	file=File.open(filename, "w")
+	file.puts message
+	file.close
+end	
+	
+
 get '/' do
 	info = "Hello there!"
 	len = info.length
@@ -216,6 +223,19 @@ get '/user/delete/:uzer' do
 	end
 end
 
+post '/archive' do
+	@n=Article.where(:id=>params[:id]).to_a.first
+	if !@n
+		status 404
+		redirect '/notfound'
+	end
+	#format archive names as name_date_id.txt
+	date=@n.date.day.to_s+"_"+@n.date.month.to_s+"_"+@n.date.year.to_s
+	filename="archive/"+@n.name+"_"+date+"_"+@n.id.to_s+".txt"
+	writeFile(filename,@n.body)
+	redirect back
+end	
+		
 get '/nochange' do
 	erb :articlenochange
 end

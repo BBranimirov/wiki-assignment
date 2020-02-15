@@ -6,6 +6,10 @@
 	<a href="/article/<%= @n.name %>/edit">Edit</a> | 
 <% end %>
 <a href="/history/<%= @n.name %>">History</a>
+<form action="/archive" method="post">
+	<input type="hidden" name="id" value="<%=@n.id%>">
+	<input type="submit" value="Archive">
+</form>	
 <p>Word count: <%=@words %>, character count: <%= @characters %></p>
 <section>
 	<p class="article-body"><%= @n.body %><p>
