@@ -223,6 +223,18 @@ get '/user/delete/:uzer' do
 	end
 end
 
+delete '/user/:uzer' do
+	n=User.where(:username=>params[:uzer]).to_a.first
+	if n.username=="Admin"
+		erb :denied
+	else
+		n.destroy
+		$credentials=['','']
+		redirect '/'
+	end
+end
+	
+
 post '/archive' do
 	@n=Article.where(:id=>params[:id]).to_a.first
 	if !@n

@@ -6,4 +6,10 @@
 	<p>Last updated - <%= @Userz.updated_at %></p>
 	<p>Edit status - <%= @Userz.edit %></p>
 </article>
+<%if @Userz.username !="Admin" %>
+	<form action="/user/<%=@Userz.username %>" method="post">
+		<input type="hidden" name="_method" value="delete">
+		<input type="submit" value="Delete account">
+	</form>
+<%end %>	
 <% end %>
