@@ -6,6 +6,7 @@
 	<p>Last updated - <%= @Userz.updated_at %></p>
 	<p>Edit status - <%= @Userz.edit %></p>
 </article>
+<a href="/user/changepassword/<%=@Userz.username %>">Change password</a>
 <%if @Userz.username !="Admin" %>
 	<form action="/user/<%=@Userz.username %>" method="post">
 		<input type="hidden" name="_method" value="delete">

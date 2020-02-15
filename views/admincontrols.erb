@@ -12,6 +12,8 @@
 			<% if liste.username != "Admin" %>
 				<form action="/user/<%= liste.username %>" method="post" id="edit">
 					<input type="hidden" name="_method" value="put">
+					<%# checkbox does not send params element if unchecked, use hidden instead%>
+					<input type="hidden" name="edit" value="false">
 					<input type="checkbox" name="edit" <%= "checked" if liste.edit %>>
 					<input type="submit" value="Allow Edit?">
 				</form>

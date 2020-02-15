@@ -206,7 +206,15 @@ end
 
 put '/user/:uzer' do
 	n = User.where(:username => params[:uzer]).to_a.first
-	n.edit = params[:edit] ? 1 : 0
+	# check if edit param exists, not true when changing password
+	if params.has_key?(:edit)
+		#checkbox either is true or doesn't return params element 
+		#see if unchecked with hidden false value in admincontrols.erb
+		n.edit = params[:edit] =="false" ? 0 : 1
+	end
+	if params.has_key?(:password)
+		n.password=params[:password]
+	end	
 	n.save
 	redirect '/'
 end
@@ -234,6 +242,10 @@ delete '/user/:uzer' do
 	end
 end
 	
+get '/user/changepassword/:uzer' do
+	@username=params[:uzer]
+	erb :changepassword
+end	
 
 post '/archive' do
 	@n=Article.where(:id=>params[:id]).to_a.first
