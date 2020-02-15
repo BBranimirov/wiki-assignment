@@ -6,6 +6,7 @@
 	<a href="/article/<%= @n.name %>/edit">Edit</a> | 
 <% end %>
 <a href="/history/<%= @n.name %>">History</a>
+<p>Word count: <%=@words %>, character count: <%= @characters %></p>
 <section>
 	<p class="article-body"><%= @n.body %><p>
 </section>

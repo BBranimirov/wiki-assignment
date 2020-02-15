@@ -235,6 +235,8 @@ get '/article/:articlename' do
 		status 404
 		redirect '/notfound'
 	else
+		@characters=@n.body.length
+		@words=@n.body.split.length
 		erb :article
 	end
 end
@@ -323,6 +325,8 @@ get '/history/:articlename/:id' do
 	else
 		# track if user is viewing history of article instead of standard article page
 		@viewingHistory = true
+		@characters=@n.body.length
+		@words=@n.body.split.length
 		erb :article
 	end
 end
